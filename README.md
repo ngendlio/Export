@@ -25,9 +25,9 @@ To use it i registered an app on facebook, but it only works for me because  i h
  I used mongoose ORM.
 
 ### Features:
-*get your Albums 
-*get photos from an album
-*save photos from different albums in the same time in asynchrnouus manner
+* get your Albums 
+* get photos from an album
+* save photos from different albums in the same time in an asynchronous manner
 
 
  ## Photo Storage 
