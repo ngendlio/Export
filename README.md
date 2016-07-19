@@ -31,7 +31,7 @@ To use it i registered an app on facebook, but it only works for me because  i h
 
 
  ## Photo Storage 
- Photos are saved in a download folder. Make sure that you grant read/write access to this folder by doing  in you are under a linux based OS.
+ Photos are saved in a download folder. Make sure that you grant read/write rights to this folder by doing  in you are under a linux based OS.
 ```
  sudo chmod 777 <folder_name> 
 ```
