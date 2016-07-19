@@ -27,7 +27,8 @@ module.exports =function() {
      console.log('ERROR DB'+error);
   })
   db.once('open', function() {
-    console.log('Connected to mongo !')
+    console.log('Connected to mongo !');
+
   })
 
   app.set('views','./app/views');

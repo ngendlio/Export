@@ -1,7 +1,6 @@
 // config/passport.js
 
 // load all the things we need
-//var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 // load up the user model
@@ -13,7 +12,6 @@ var config = require('./config');
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        //console.log('tent serialize '+JSON.stringify(user))
         let sessionData= // Data to save in the session
                 {
                     id:user.facebook.id,
@@ -38,7 +36,6 @@ module.exports = function(passport) {
         clientID        : config.fb_auth.clientID,
         clientSecret    : config.fb_auth.clientSecret,
         callbackURL     : config.fb_auth.callBackUrl,
-        profileFields   : ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'], 
     },
     // facebook will send back the token and profile
     function(accessToken, refreshToken, profile, done) {
