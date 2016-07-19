@@ -13,7 +13,7 @@ This App has 3 main folders :
 ## Template engine
  Templating : I used the NODE template engine JADE
   Ps: Sorry, i am not good at choosing colors. 
-
+## How to use
 To use it i registered an app on facebook, but it only works for me because  i have not got time to wait for  the LOGIN REVIEW from facebook that would authorize other users to use my application.
 
 
