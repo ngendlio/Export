@@ -1,9 +1,10 @@
 # ExportPic
-  This App has 3 main folders :
-  1) app : containing all the MVC(views, models,controllers, and routes)
-  2) config: contains all the setup options used for this application(security, config,environment modules)
-  3) public: containing public accessible files, like css,front-end scripts
-  4) download: All downloaded images fomr facebook are stored in this Folder 0_o
+This App has 3 main folders :
+
+1. app : containing all the MVC(views, models,controllers, and routes)
+2. config: contains all the setup options used for this application(security, config,environment modules)
+3. public: containing public accessible files, like css,front-end scripts
+4. download: All downloaded images fomr facebook are stored in this Folder 0_o
   
  Sessions are managed by Express-session ie a server-side based session
  Sessions should be stored in memorycached or redis Stores because it is not recommended to use the in-memory  to store sessions but in this example i used in memory to store sessions for EASE resaons
