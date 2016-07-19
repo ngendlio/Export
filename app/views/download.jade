@@ -1,0 +1,17 @@
+.w3-container
+	.w3-center(ng-show='downloading',ng-init='downloading=true')
+		p.w3-jumbo Sauvegarde en cours ...
+		p.w3-jumbo.w3-animate-fading.w3-text-blue {{success}} sur {{total}}
+		.w3-progress-container.w3-tiny
+			.w3-progressbar.w3-blue(style="width:{{percentage}}%")
+				.w3-center.w3-text-white 
+			br
+	.w3-center(ng-show='!downloading')
+		.w3-center(ng-show='!error')
+			p.w3-jumbo.w3-text-green.w3-animate-zoom <strong> Votre sauvegarde est finie  </strong>
+				i.fa.fa-check.w3-text-green.w3-jumbo.w3-animate-zoom
+			p.w3-large Vous allez être redirigé vers les albums
+		.w3-center(ng-show='error',ng-init='error=false')
+			p.w3-jumbo.w3-text-red.w3-animate-zoom <strong> Votre sauvegarde ne s'est interrompue  </strong>
+				i.fa.fa-check.w3-text-green.w3-jumbo.w3-animate-fading
+			p.w3-large {{error_msg}}

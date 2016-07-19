@@ -1,0 +1,41 @@
+doctype html
+html(lang="fr" ng-app="photoExport")
+    head
+        block title
+            title Export your photos 
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        //base(href="/")
+
+        //some css stuff
+        link(rel="stylesheet", type="text/css", href="https://fonts.googleapis.com/css?family=Arimo|Poiret+One|Dosis|Trirong" )
+        link(rel="stylesheet", type="text/css", href="css/w3.css")
+        link(rel="stylesheet", type="text/css", href="css/monStyle.css")
+        link(rel="stylesheet", type="text/css", href="css/fontAwesome/css/font-awesome.min.css")
+        
+        //some scripts
+        script(src="js/angular.js")
+        script(src="js/angular-route.js")
+
+        //script(src="js/socket-io_137.js")
+        script(src="js/my_script.js")
+        block scripts
+
+        
+    body.w3-animate-opacity
+        .w3-container.w3-padding-hor-8.w3-red
+            ul.w3-navbar
+                li
+                    a.w3-hover-none(href="#accueil"): .w3-xlarge: b  ExportPic 
+                        i.fa.fa-camera-retro.w3-text-blue
+                li
+                    a.w3-hover-yellow(href="#my_albums").w3-xlarge Mes albums  
+                li
+                    a.w3-hover-yellow(href="#logout").w3-xlarge Déconnexion  
+                        i.fa.fa-sign-out.w3-text-blue.w3-large
+
+        .w3-container.w3-padding-jumbo
+            block content   
+
+    block lastScripts
+

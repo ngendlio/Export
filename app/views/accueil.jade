@@ -1,0 +1,11 @@
+.w3-container
+	.w3-center
+		p.w3-jumbo Bienvenue cher 
+			i.w3-text-blue.w3-jumbo.w3-animate-zoom #{name}
+		//or just do large
+		img.w3-circle.w3-animate-zoom(src="https://graph.facebook.com/#{user_id}/picture?width=200&height=200&access_token=#{token}")
+		p.w3-jumbo.w3-animate-bottom.w3-text-blue(ng-show="!showButton") {{message}}
+		
+	.w3-center
+		p.w3-jumbo.w3-animate-bottom
+			a.w3-btn(href="/#/my_albums",ng-show="showButton",ng-init="showButton=false").w3-jumbo.w3-blue.w3-round C'est parti !

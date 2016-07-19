@@ -1,0 +1,27 @@
+.w3-container
+
+	h1.w3-text-blue Albums de #{name}
+	
+	.w3-center
+		.w3-container
+			h1.w3-blue.w3-animate-top Vos albums photos 
+		.w3-margin-top.w3-padding-32.w3-content(ng-show="!error")
+			.w3-container(ng-if="loading", ng-init="loading=false").w3-animate-fading
+				p.w3-jumbo.w3-text-blue Chargement ...
+			.app(ng-repeat="album in listAlbums | orderBy:'name'")
+				.w3-col.l6.m6.s6.w3-container
+					a(href="#/photos?album_id={{album.id}}")
+						.w3-container.w3-animate-left
+							.w3-card-2.w3-yellow.w3-hover-shadow.w3-border(style="width:228px;height:228px;")
+								img(src="https://graph.facebook.com/{{album.id}}/picture?type=album&access_token={{token}}", style="width:100%;height:100%;")
+								.w3-display-bottomleft.w3-container(style="width:228px;height:228px;")
+									p.w3-blue: i.fa.fa-picture-o.w3-hover-opacity   {{album.name}}
+						br
+							
+			h3.w3-padding-32.w3-text-blue.w3-jumbo(ng-show="no_album",ng-init="no_album=false").w3-center Aucun album disponible
+		.w3-center(ng-show="error")
+			p.w3-jumbo.w3-white {{error_msg}}
+			button.w3-btn.w3-jumbo.w3-white(ng-click="getAlbum()").w3-animate-bottom
+				i.fa.fa-refresh.w3-jumbo.w3-text-red.w3-white
+				
+
