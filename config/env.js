@@ -7,6 +7,15 @@
 */
 var env = 'DEV'; // PROD
 
+ /**
+  * Description
+  * @method errorHandler
+  * @param {} err
+  * @param {} req
+  * @param {} res
+  * @param {} next
+  * @return 
+  */
  exports.errorHandler = function(err,req,res,next){
  	if(env==='DEV'){
       	console.log(err);

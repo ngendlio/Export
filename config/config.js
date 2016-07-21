@@ -1,5 +1,5 @@
 'use strict';
-
+let DBName ='PhotoApp'
 module.exports = {
   // in case of redis is used
   // redis:
@@ -11,7 +11,7 @@ module.exports = {
   //   },
   mongo:
   {
-    url:'mongodb://127.0.0.1/PhotoApp',
+    url:'mongodb://127.0.0.1/'+DBName, //
   },
     /*  You shoud use your own clientID and ClientSecret*/
   'fb_auth':{

@@ -9,6 +9,12 @@ var DB = require('../app/models/DB');
 // load the auth variables
 var config = require('./config');
 
+/**
+ * Description
+ * @method exports
+ * @param {} passport
+ * @return 
+ */
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {

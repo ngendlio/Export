@@ -9,6 +9,12 @@ var filter = require('content-filter'), // anti NO-SQL injection
     helmet = require('helmet'),         //useful security-headers
     config = require('./config')
 
+/**
+ * Description
+ * @method exports
+ * @param {} app
+ * @return 
+ */
 module.exports = function(app){
   //Avoid NO-SQL injection  in the urls and forms
   app.use(filter({

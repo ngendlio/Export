@@ -1,4 +1,11 @@
 
+/**
+ * Description
+ * @method exports
+ * @param {} app
+ * @param {} passport
+ * @return 
+ */
 module.exports = function(app,passport){
 
   app.use(function(req,res,next){
@@ -7,6 +14,14 @@ module.exports = function(app,passport){
   })
   var server = require ('../controllers/serverController');
 
+  /**
+   * Description
+   * @method isAuthenticated
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   var isAuthenticated = function(req,res,next){
     console.log(' cjeck ')
       if(req.isAuthenticated()) return next();

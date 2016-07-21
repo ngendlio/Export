@@ -1,6 +1,11 @@
 var express = require('express'),
     config= require('./config');
 
+/**
+ * Description
+ * @method exports
+ * @return app
+ */
 module.exports =function() {
   //Setup configuration
   var app =express();

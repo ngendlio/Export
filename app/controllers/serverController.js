@@ -1,20 +1,46 @@
 var config =require('../../config/config'),
     DB = require('../models/DB')
 
-// Pur l page d acueil
+/**
+ * Description
+ * @method getPage_Start
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.getPage_Start = function(req, res){
 	res.render('./startpage')
 };
+/**
+ * Description
+ * @method getPage_Login
+ * @param {} req
+ * @param {} res
+ * @return 
+ */
 exports.getPage_Login = function(req, res){
   res.render('./login')
 };
 
+/**
+ * Description
+ * @method getPage_Albums
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.getPage_Albums = function(req,res,next){
   res.render('./albums',{name:req.session.passport.user.name});
 }
-/*
+/**
  * Here we just make a request to get all the albums of the current user and return them to the front end
-*/
+ * @method getAlbumData
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.getAlbumData= function(req,res,next){
   //faire rekete sur FB, puis lui donner la reponse
   var request = require('request');
@@ -41,13 +67,26 @@ exports.getAlbumData= function(req,res,next){
  
 }
 
+/**
+ * Description
+ * @method getPage_Photos
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return CallExpression
+ */
 exports.getPage_Photos = function(req,res,next){
   return res.render('./photos',{name:req.session.passport.user.name});
 }
-/*
+/**
  * Here we just get the list of Photos ID thatbelongs to a certain album.
  * We receive an album url and we just make the request
-*/
+ * @method getPhotosData
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.getPhotosData= function(req,res,next){
 
   req.assert('album_url','Donner un URL valide').notEmpty().isURL();
@@ -77,9 +116,14 @@ exports.getPhotosData= function(req,res,next){
       }
   })
 }
-/*
+/**
  * Here we just delete all sessions information
-*/
+ * @method logout
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.logout= function(req,res,next){
   if(req.session) 
     req.session.destroy();
@@ -88,15 +132,28 @@ exports.logout= function(req,res,next){
   res.end();
 }
 
+/**
+ * Description
+ * @method getPage_Welcome
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return CallExpression
+ */
 exports.getPage_Welcome= function(req,res,next){
   console.log(' Page welcome ')
   return res.render('./accueil',{name:req.session.passport.user.name,
     token:req.session.passport.user.token,user_id:req.session.passport.user.id})
 }
-/*
+/**
  * Here we just get the list of the photos ID to download and we we ill download them 
- in asynchronous manner.
-*/
+ * in asynchronous manner.
+ * @method savePhotos
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.savePhotos = function(req,res,next){
   
   let selectedPics = req.body.selectedPics;
@@ -150,6 +207,14 @@ exports.savePhotos = function(req,res,next){
     res.end();
 }
 
+/**
+ * Description
+ * @method getDownloadData
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return CallExpression
+ */
 exports.getDownloadData = function(req,res,next){
   //Just simply return the obj containning all the information about the process
   let infos =req.session.download;
@@ -162,10 +227,24 @@ exports.getDownloadData = function(req,res,next){
   return res.json(infos);
 
 }
+/**
+ * Description
+ * @method getPage_Download
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return CallExpression
+ */
 exports.getPage_Download = function(req,res,next){
   return res.render('./download')
 }
 
+/**
+ * Description
+ * @method isJson
+ * @param {} str
+ * @return Literal
+ */
 function isJson(str) {
     try {
         JSON.parse(str);
@@ -174,6 +253,14 @@ function isJson(str) {
     }
     return true;
 }
+/**
+ * Description
+ * @method page404
+ * @param {} req
+ * @param {} res
+ * @param {} next
+ * @return 
+ */
 exports.page404 = function(req,res,next){
   //this should be reported
   res.json('Cette page nous est inconnue ');
