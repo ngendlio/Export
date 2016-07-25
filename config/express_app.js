@@ -68,7 +68,8 @@ module.exports =function() {
     resave: false,
     saveUninitialized: false,
     proxy:false,
-    name : 'unknown_server' // Never broadcast your Web server type, now simulate PHP: 
+    // Spoof another webserver by giving another cookie name
+    name : 'PHPSESSID' 
   }));
  
   // load passport module

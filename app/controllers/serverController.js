@@ -31,7 +31,7 @@ exports.getPage_Login = function(req, res){
  * @return 
  */
 exports.getPage_Albums = function(req,res,next){
-  res.render('./albums',{name:req.session.passport.user.name});
+  res.render('./albums',{name:req.user.facebook.name});
 }
 /**
  * Here we just make a request to get all the albums of the current user and return them to the front end
@@ -44,8 +44,8 @@ exports.getPage_Albums = function(req,res,next){
 exports.getAlbumData= function(req,res,next){
   //faire rekete sur FB, puis lui donner la reponse
   var request = require('request');
- let URL ='https://graph.facebook.com/v2.7/me/albums?access_token='+req.session.passport.user.token;
-    // let URL ='https://graph.facebook.com/v2.7/me/albums?access_token='+req.session.passport.user.token
+ let URL ='https://graph.facebook.com/v2.7/me/albums?access_token='+req.user.facebook.token;
+    // let URL ='https://graph.facebook.com/v2.7/me/albums?access_token='+req.user.facebook.token
     console.log(URL)
   request.get({url:URL}
     , function (erreur, response, body) {
@@ -56,8 +56,7 @@ exports.getAlbumData= function(req,res,next){
         // be sure that results are in JSON format      
           if(isJson(body)){            
             let reponse=[];
-            console.log(JSON.parse(body).data)
-            reponse.push({"token":req.session.passport.user.token,"albums":JSON.parse(body).data})
+            reponse.push({"token":req.user.facebook.token,"albums":JSON.parse(body).data})
             res.json(reponse)
           }
           else
@@ -76,7 +75,7 @@ exports.getAlbumData= function(req,res,next){
  * @return CallExpression
  */
 exports.getPage_Photos = function(req,res,next){
-  return res.render('./photos',{name:req.session.passport.user.name});
+  return res.render('./photos',{name:req.user.facebook.name});
 }
 /**
  * Here we just get the list of Photos ID thatbelongs to a certain album.
@@ -98,7 +97,7 @@ exports.getPhotosData= function(req,res,next){
   //choose to add accesstoke 
   let album_url = req.body.album_url;
   if(album_url.indexOf('access_token') ==-1)
-     album_url = album_url+'?access_token='+req.session.passport.user.token;
+     album_url = album_url+'?access_token='+req.user.facebook.token;
   
   request.get({url:album_url} , function (erreur, response, body) {  
 
@@ -108,7 +107,7 @@ exports.getPhotosData= function(req,res,next){
       else {
           if(isJson(body)){            
             let reponse=[];
-            reponse.push({"token":req.session.passport.user.token,"paging":JSON.parse(body).paging,"photos":JSON.parse(body).data})
+            reponse.push({"token":req.user.facebook.token,"paging":JSON.parse(body).paging,"photos":JSON.parse(body).data})
             res.json(reponse)
           }
           else
@@ -141,9 +140,9 @@ exports.logout= function(req,res,next){
  * @return CallExpression
  */
 exports.getPage_Welcome= function(req,res,next){
-  console.log(' Page welcome ')
-  return res.render('./accueil',{name:req.session.passport.user.name,
-    token:req.session.passport.user.token,user_id:req.session.passport.user.id})
+  //req.user.facebook.name
+  return res.render('./accueil',{name:req.user.facebook.name,
+    token:req.user.facebook.token,user_id:req.user.facebook.id})
 }
 /**
  * Here we just get the list of the photos ID to download and we we ill download them 
@@ -176,7 +175,7 @@ exports.savePhotos = function(req,res,next){
   // Save files in asynchronous manner to avoid blocking
   async.eachSeries(selectedPics,
     function(photo_id,callback){
-      let url="https://graph.facebook.com/"+photo_id+"/picture?access_token="+req.session.passport.user.token;
+      let url="https://graph.facebook.com/"+photo_id+"/picture?access_token="+req.user.facebook.token;
 
     progress(request(url), {
       throttle: 2000,                    // Throttle the progress event to 2000ms, defaults to 1000ms 
@@ -218,7 +217,7 @@ exports.savePhotos = function(req,res,next){
 exports.getDownloadData = function(req,res,next){
   //Just simply return the obj containning all the information about the process
   let infos =req.session.download;
-  console.log(JSON.stringify(infos))
+  // console.log(JSON.stringify(infos))
   if(req.session.download && req.session.download.finished){
 
     req.session.download=null;
@@ -262,6 +261,6 @@ function isJson(str) {
  * @return 
  */
 exports.page404 = function(req,res,next){
-  //this should be reported
+  //this should be reported to logs
   res.json('Cette page nous est inconnue ');
 }

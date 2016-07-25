@@ -17,22 +17,16 @@ var config = require('./config');
  */
 module.exports = function(passport) {
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        let sessionData= // Data to save in the session
-                {
-                    id:user.facebook.id,
-                    token: user.facebook.token,
-                    name:user.facebook.name,                    
-                };
-        done(null, sessionData);
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+   //console.log('tent DEserialize '+JSON.stringify(sessionData))
+    DB.User.findById(id, function(err, user) {
+        done(err, user);
     });
-    // used to deserialize the user
-    passport.deserializeUser(function(sessionData, done) {
-       //console.log('tent DEserialize '+JSON.stringify(sessionData))
-        DB.User.findOne(sessionData.id, function(err, user) {
-            done(err, user);
-        });
-    });    
+});    
   
     // =========================================================================
     // FACEBOOK ================================================================

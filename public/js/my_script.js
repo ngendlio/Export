@@ -185,7 +185,7 @@ app.controller('photosCtrl', function($scope,$routeParams,$timeout,$window, $htt
     $scope.save = function(){
       //alert("START ")
       if(listPhotos.isEmpty()) return false;
-      $http.post('/photos_upload',{"selectedPics":listPhotos.getSelectedPhotos()})
+      $http.post('/postSavePhotos',{"selectedPics":listPhotos.getSelectedPhotos()})
       .then(function(response){
        // alert("reponse serveur "+JSON.stringify(response.data))
         $window.location.href = '#/downloading';

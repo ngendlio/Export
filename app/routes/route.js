@@ -8,10 +8,7 @@
  */
 module.exports = function(app,passport){
 
-  app.use(function(req,res,next){
-    console.log(JSON.stringify(req.url))
-    next()
-  })
+
   var server = require ('../controllers/serverController');
 
   /**
@@ -23,26 +20,34 @@ module.exports = function(app,passport){
    * @return 
    */
   var isAuthenticated = function(req,res,next){
-    console.log(' cjeck ')
       if(req.isAuthenticated()) return next();
       else return res.render('./login');
   }
-
+  //Home page
   app.get('/',server.getPage_Start); 
-  app.get('/login',server.getPage_Login); 
+
+  /* AUthenticated routes*/
+
+  //Page to welcome the user after authentication
   app.get('/accueil',isAuthenticated,server.getPage_Welcome)
-
+  // Albums page
   app.get('/my_albums' ,isAuthenticated,server.getPage_Albums);
-  app.get('/my_albumsData',isAuthenticated,server.getAlbumData)
-
+  app.get('/my_albumsData',isAuthenticated,server.getAlbumData);
+  //get page of album's photos
+  app.get('/photos',isAuthenticated,server.getPage_Photos)
+  // get the list of photos of this album
+  app.post('/view_album',isAuthenticated, server.getPhotosData)
+  //when the user decides to save selectedPhotos
+  app.post('/postSavePhotos',isAuthenticated,server.savePhotos)
+  //page that shows the state of the download
   app.get('/downloading',isAuthenticated,server.getPage_Download);
+  //get state of the current download
   app.get('/get_state',isAuthenticated,server.getDownloadData);
 
-  app.get('/photos',isAuthenticated,server.getPage_Photos)
-  app.post('/view_album',isAuthenticated, server.getPhotosData)
-
-  app.post('/photos_upload',isAuthenticated,server.savePhotos)
-
+/* Unauthenticated routes*/
+  // Login page
+  app.get('/login',server.getPage_Login); 
+  // loging out
   app.get('/logout',server.logout)
   // route for facebook authentication and login
   app.get('/auth/facebook', passport.authenticate('facebook', { scope :['user_photos'] }));
@@ -52,8 +57,6 @@ module.exports = function(app,passport){
           failureRedirect : '/#/login'
       })
   );
+  //404 error handling controller..
   app.all('*', server.page404); 
-
-
-
 }
