@@ -21,15 +21,12 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-   //console.log('tent DEserialize '+JSON.stringify(sessionData))
     DB.User.findById(id, function(err, user) {
         done(err, user);
     });
 });    
-  
-    // =========================================================================
-    // FACEBOOK ================================================================
-    // =========================================================================
+  /* Facebook Strategy */
+    
     passport.use(new FacebookStrategy({
         // pull in our app id and secret from our auth.js file
         clientID        : config.fb_auth.clientID,
