@@ -15,8 +15,8 @@ module.exports = {
   },
     /*  You shoud use your own clientID and ClientSecret*/
   'fb_auth':{
-    clientID:'1820181531545249',
-    clientSecret:'a9387ea28cbac5e453b7e1b903ca6eb4',
+    clientID:'833829753419759',
+    clientSecret:'bacb8d037f3e70e09ccf5a2b760f25ef',
     callBackUrl:'http://localhost:12016/auth/facebook/callback'
   },
 

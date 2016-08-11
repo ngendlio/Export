@@ -8,7 +8,6 @@ var DB = require('../app/models/DB');
 
 // load the auth variables
 var config = require('./config');
-
 /**
  * Description
  * @method exports

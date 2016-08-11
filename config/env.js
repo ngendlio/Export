@@ -1,5 +1,4 @@
 
-
 /*
  * We choose how we handle errors depending on the environment i.e PROD or DEV 
  * these variables should not be hard coded but should be loaded from the computer environment
