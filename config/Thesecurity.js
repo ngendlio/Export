@@ -26,7 +26,7 @@ module.exports = function(app){
   app.use(helmet.noSniff()) 
   app.use(helmet.frameguard({ action: 'deny' }))// Don't allow my app to be in ANY frames:
   app.use(helmet.xssFilter())     //X-XSS-Protection HTTP header 
-  app.use(helmet.hidePoweredBy({ setTo: 'Erlang' })) // Spoof server Name  to Erlang. LOL
+  app.use(helmet.hidePoweredBy({ setTo: 'Microsoft-IIS/8.5' })) // Spoof server Name  to Microsoft-IIS to avoid targetted attacks. LOL
 
   //ces 2 fxions ki suivent c est pour eviter un attaque de csrf lors d'un post
   /*

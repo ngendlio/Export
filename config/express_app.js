@@ -29,11 +29,11 @@ module.exports =function() {
   var db = mongoose.connection;
 
   db.on('error',function(error){
-     console.log('ERROR DB'+error);
+     console.log('Not connected to Mongo DB, an instance of a mongo DB is required to run this application ');
+     console.log(error);
   })
   db.once('open', function() {
-    console.log('Connected to mongo !');
-
+    console.log('Perfect !');
   })
 
   app.set('views','./app/views');
@@ -42,7 +42,8 @@ module.exports =function() {
   app.use(express.static('./public', { maxAge: 60*60 })); // For  CSS et images...,specify cache limit in time
   app.use(favicon('./public/favicon.ico'));
 
-  app.use(logger('dev'));
+  if(require('./env').isDev)
+    app.use(logger('dev'));
   app.use(bodyParser.json()); // support json encoded bodies
   app.use(bodyParser.urlencoded({extended:false})); // support encoded bodies
   app.use(expressValidator()); 
@@ -68,8 +69,8 @@ module.exports =function() {
     resave: false,
     saveUninitialized: false,
     proxy:false,
-    // Spoof another webserver by giving another cookie name
-    name : 'PHPSESSID' 
+    // Spoof another web language by giving another cookie name to avoid targetted attacks
+    name : 'ASP.NET_SessionId' 
   }));
  
   // load passport module
